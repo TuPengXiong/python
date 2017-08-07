@@ -18,15 +18,26 @@ db = MySQLdb.connect("127.0.0.1","root","mysql","weixin" )
 # 使用cursor()方法获取操作游标
 cursor = db.cursor()
 
-# 使用execute方法执行SQL语句
+
 cursor.execute("SELECT * from wx_text limit 0,1")
 
-# 使用 fetchone() 方法获取一条数据库。
+
 data = cursor.fetchone()
 #data = cursor.fetchmany()
 print  data
 
 cursor.close()
 
+
+
+import DbHelper
+#dbHelper = DbHelper("192.168.18.253", "aidaijava888", "admin_123", "dc_user", 3306)
+dbHelper = DbHelper("127.0.0.1", "root", "mysql", "weixin", 3306)
+cursor = dbHelper.db.cursor()
+# 使用execute方法执行SQL语句
+cursor.execute("select * from wx_text limit 0,1")
+# 使用 fetchone() 方法获取一条数据库。
+print cursor.fetchone()
 # 关闭数据库连接
-db.close()
+cursor.close()
+dbHelper.disconnect()
